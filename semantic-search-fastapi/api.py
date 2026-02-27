@@ -12,6 +12,7 @@ from openai.embeddings_utils import get_embeddings
 from pydantic import BaseModel
 
 from chunking_utils import overlapping_chunks
+
 # optional use of supabase for conversation history
 from conversation_utils import ChatbotGPT
 from retrieval_utils import get_results
@@ -24,28 +25,23 @@ pinecone_key = os.getenv("PINECONE_API_KEY")
 
 app = FastAPI()
 
-INDEX_NAME = 'semantic-search'
-ENGINE = 'text-embedding-ada-002'
+INDEX_NAME = "semantic-search"
+ENGINE = "text-embedding-ada-002"
 
 if pinecone_key:
-
-    pc = Pinecone(
-        api_key=pinecone_key
-    )
+    pc = Pinecone(api_key=pinecone_key)
     if INDEX_NAME not in pc.list_indexes().names():
-        print(f'Creating index {INDEX_NAME}')
+        print(f"Creating index {INDEX_NAME}")
         pc.create_index(
             name=INDEX_NAME,  # The name of the index
             dimension=3072,  # The dimensionality of the vectors for our OpenAI embedder
-            metric='cosine',  # The similarity metric to use when searching the index
-            spec=ServerlessSpec(
-                cloud='aws',
-                region='us-west-2'
-            )
+            metric="cosine",  # The similarity metric to use when searching the index
+            spec=ServerlessSpec(cloud="aws", region="us-west-2"),
         )
 
     # Store the index as a variable
     index = pc.Index(name=INDEX_NAME)
+
 
 def my_hash(s):
     # Return the MD5 hash of the input string as a hexadecimal string
@@ -107,11 +103,11 @@ async def document_ingest(request: DocumentInputRequest):
     if chunking_strategy == "sentence":
         chunks = re.split(r' *[\.\?!][\'"\)\]]* *', text)
     elif chunking_strategy == "paragraph":
-        chunks = text.split('\n')
+        chunks = text.split("\n")
     elif chunking_strategy == "none":
         chunks = [text]
-    elif 'overlapping' in chunking_strategy:
-        _, max_tokens, overlapping_factor = chunking_strategy.split('-')
+    elif "overlapping" in chunking_strategy:
+        _, max_tokens, overlapping_factor = chunking_strategy.split("-")
         chunks = overlapping_chunks(text, max_tokens=500, overlapping_factor=5)
     else:
         raise Exception("Invalid chunking strategy")
@@ -123,16 +119,20 @@ async def document_ingest(request: DocumentInputRequest):
 
     pinecone_request = [
         (
-            my_hash(text),  # A unique ID for each string, generated using the my_hash() function
+            my_hash(
+                text
+            ),  # A unique ID for each string, generated using the my_hash() function
             embedding,  # The vector embedding of the string
-            dict(text=text, date_uploaded=datetime.utcnow())
+            dict(text=text, date_uploaded=datetime.utcnow()),
             # A dictionary of metadata, including the original text and the current UTC date and time
         )
         for text, embedding in zip(chunks, embeddings)
         # Iterate over each input string and its corresponding vector embedding
     ]
 
-    upserted_count = index.upsert(pinecone_request, namespace=request.namespace).get('upserted_count')
+    upserted_count = index.upsert(pinecone_request, namespace=request.namespace).get(
+        "upserted_count"
+    )
 
     return DocumentInputResponse(chunks_count=upserted_count)
 
@@ -145,15 +145,18 @@ async def document_retrieve(request: DocumentRetrieveRequest):
     re_ranking_strategy = request.re_ranking_strategy
     namespace = request.namespace
     num_results = request.num_results
-    results = get_results(index, query, re_ranking_strategy, num_results, namespace, ENGINE)
+    results = get_results(
+        index, query, re_ranking_strategy, num_results, namespace, ENGINE
+    )
 
     results = [
         DocumentResponse(
-            text=r['metadata']['text'],
-            date_uploaded=r['metadata']['date_uploaded'],
-            score=r['score'],
-            id=r['id']
-        ) for r in results
+            text=r["metadata"]["text"],
+            date_uploaded=r["metadata"]["date_uploaded"],
+            score=r["score"],
+            id=r["id"],
+        )
+        for r in results
     ]
     return DocumentRetrieveResponse(documents=results)
 
@@ -171,11 +174,15 @@ async def conversation(request: ConversationRequest):
     threshold = request.threshold
 
     conversation_id = request.conversation_id
-    c = ChatbotGPT(namespace, index, ENGINE, threshold=threshold, conversation_id=conversation_id)
+    c = ChatbotGPT(
+        namespace, index, ENGINE, threshold=threshold, conversation_id=conversation_id
+    )
     response = c.user_turn(message)
     print(response)
 
-    return ConversationResponse(text=response['content'], conversation_id=c.conversation_id)
+    return ConversationResponse(
+        text=response["content"], conversation_id=c.conversation_id
+    )
 
 
 if __name__ == "__main__":

@@ -70,7 +70,7 @@ book:
         - text: "생성 모델 평가 기법"
           file: notebooks/12_llm_gen_eval.ipynb
         - text: "LLM 출력 클러스터링"
-          file: notebooks/12_cluster.ipynb"
+          file: notebooks/12_cluster.ipynb
 
 bibliography: references.bib
 
