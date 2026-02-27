@@ -1,5 +1,5 @@
 [workspace]
-authors = ["deepthought <deepthough@postech.ac.kr>"]
+authors = ["Sinan Ozdemir"]
 channels = ["conda-forge"]
 name = "quick-start-guide-to-llms"
 platforms = ["linux-64"]

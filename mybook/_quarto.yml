@@ -7,46 +7,70 @@ execute:
   enabled: false
 
 book:
-  title: "quick-start-llm"
-  author: "Norah Jones"
-  date: "2/27/2026"
+  title: "대규모 언어 모델(LLM) 입문 가이드"
+  subtitle: "ChatGPT 및 주요 LLM 활용을 위한 전략과 모범 사례"
+  author: "Sinan Ozdemir"
+  date: "2026-02-27"
   chapters:
     - index.qmd
-    - intro.qmd
-    - part: "Part I - Introduction to Large Language Models"
+    - part: "제1부 - 대규모 언어 모델 입문"
       chapters:
-        - notebooks/02_semantic_search.ipynb
-        - notebooks/03_prompt_engineering.ipynb
-        - notebooks/04_rag_retrieval.ipynb
-        - notebooks/04_agent.ipynb
-    - part: "Part II - Getting the Most Out of LLMs"
+        - text: "시맨틱 검색 기초"
+          file: notebooks/02_semantic_search.ipynb
+        - text: "프롬프트 엔지니어링의 첫걸음"
+          file: notebooks/03_prompt_engineering.ipynb
+        - text: "RAG 및 정보 검색"
+          file: notebooks/04_rag_retrieval.ipynb
+        - text: "AI 에이전트 구축"
+          file: notebooks/04_agent.ipynb
+    - part: "제2부 - LLM의 잠재력 극대화하기"
       chapters:
-        - notebooks/05_bert_app_review.ipynb
-        - notebooks/05_openai_app_review_fine_tuning.ipynb
-        - notebooks/06_adv_prompt_engineering.ipynb
-        - notebooks/06_adv_prompt_engineering - DEEPSEEK.ipynb
-        - notebooks/06_adv_prompt_engineering - Llama4.ipynb
-        - notebooks/07_recommendation_engine.ipynb
-    - part: "Part III - Advanced LLM Usage"
+        - text: "BERT를 이용한 앱 리뷰 분류"
+          file: notebooks/05_bert_app_review.ipynb
+        - text: "OpenAI 모델 미세 조정"
+          file: notebooks/05_openai_app_review_fine_tuning.ipynb
+        - text: "고급 프롬프트 엔지니어링"
+          file: notebooks/06_adv_prompt_engineering.ipynb
+        - text: "DeepSeek 모델 사례 연구"
+          file: notebooks/06_adv_prompt_engineering - DEEPSEEK.ipynb
+        - text: "Llama 4 모델 사례 연구"
+          file: notebooks/06_adv_prompt_engineering - Llama4.ipynb
+        - text: "추천 엔진 구축"
+          file: notebooks/07_recommendation_engine.ipynb
+    - part: "제3부 - 고급 LLM 활용 기법"
       chapters:
-        - notebooks/09_constructing_a_vqa_system.ipynb
-        - notebooks/09_using_our_vqa.ipynb
-        - notebooks/09_flan_t5_rl.ipynb
-        - notebooks/10_SAWYER_LLAMA_SFT.ipynb
-        - notebooks/10_SAWYER_Reward_Model.ipynb
-        - notebooks/10_SAWYER_RLF.ipynb
-        - notebooks/10_SAWYER_USE_SAWYER.ipynb
-        - notebooks/10_anime_category_classification_model_freezing.ipynb
-        - notebooks/10_latex_gpt2.ipynb
-        - notebooks/10_optimizing_fine_tuning.ipynb
-        - notebooks/11_distillation_example_1.ipynb
-        - notebooks/11_distillation_example_2.ipynb
-        - notebooks/11_llama_quantization.ipynb
-        - notebooks/12_llm_calibration.ipynb
-        - notebooks/12_llm_gen_eval.ipynb
-        - notebooks/12_cluster.ipynb
-    - summary.qmd
-    - references.qmd
+        - text: "VQA 시스템 구축 가이드"
+          file: notebooks/09_constructing_a_vqa_system.ipynb
+        - text: "VQA 시스템 활용하기"
+          file: notebooks/09_using_our_vqa.ipynb
+        - text: "RL을 활용한 FLAN-T5 개선"
+          file: notebooks/09_flan_t5_rl.ipynb
+        - text: "Llama-3 SFT (SAWYER 에이전트)"
+          file: notebooks/10_SAWYER_LLAMA_SFT.ipynb
+        - text: "보상 모델 학습"
+          file: notebooks/10_SAWYER_Reward_Model.ipynb
+        - text: "RLHF 적용하기"
+          file: notebooks/10_SAWYER_RLF.ipynb
+        - text: "SAWYER 에이전트 활용"
+          file: notebooks/10_SAWYER_USE_SAWYER.ipynb
+        - text: "애니메이션 분류 모델"
+          file: notebooks/10_anime_category_classification_model_freezing.ipynb
+        - text: "GPT-2를 이용한 LaTeX 생성"
+          file: notebooks/10_latex_gpt2.ipynb
+        - text: "미세 조정 최적화 가이드"
+          file: notebooks/10_optimizing_fine_tuning.ipynb
+        - text: "지식 증류 기술 (1)"
+          file: notebooks/11_distillation_example_1.ipynb
+        - text: "고급 보조 학습과 증류 (2)"
+          file: notebooks/11_distillation_example_2.ipynb
+        - text: "Llama 모델 양자화"
+          file: notebooks/11_llama_quantization.ipynb
+        - text: "LLM 출력 캘리브레이션"
+          file: notebooks/12_llm_calibration.ipynb
+        - text: "생성 모델 평가 기법"
+          file: notebooks/12_llm_gen_eval.ipynb
+        - text: "LLM 출력 클러스터링"
+          file: notebooks/12_cluster.ipynb"
 
 bibliography: references.bib
 
@@ -55,8 +79,4 @@ format:
     theme:
       - cosmo
       - brand
-  pdf:
-    documentclass: scrreprt
-
-
 

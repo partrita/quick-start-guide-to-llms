@@ -1,4 +1,5 @@
 # Quick Start Guide to Large Language Models - Second Edition
+
 <p align="center">
   <a href="https://www.amazon.com/Quick-Start-Guide-Language-Models-dp-0135346568/dp/0135346568">Get your copy today</a> and please leave a rating/review to tell me what you thought! ⭐⭐⭐⭐⭐
 </p>
