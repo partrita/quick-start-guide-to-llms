@@ -1,0 +1,62 @@
+project:
+  type: book
+  output-dir: _book
+
+execute:
+  execute-nb: false
+  enabled: false
+
+book:
+  title: "quick-start-llm"
+  author: "Norah Jones"
+  date: "2/27/2026"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: "Part I - Introduction to Large Language Models"
+      chapters:
+        - notebooks/02_semantic_search.ipynb
+        - notebooks/03_prompt_engineering.ipynb
+        - notebooks/04_rag_retrieval.ipynb
+        - notebooks/04_agent.ipynb
+    - part: "Part II - Getting the Most Out of LLMs"
+      chapters:
+        - notebooks/05_bert_app_review.ipynb
+        - notebooks/05_openai_app_review_fine_tuning.ipynb
+        - notebooks/06_adv_prompt_engineering.ipynb
+        - notebooks/06_adv_prompt_engineering - DEEPSEEK.ipynb
+        - notebooks/06_adv_prompt_engineering - Llama4.ipynb
+        - notebooks/07_recommendation_engine.ipynb
+    - part: "Part III - Advanced LLM Usage"
+      chapters:
+        - notebooks/09_constructing_a_vqa_system.ipynb
+        - notebooks/09_using_our_vqa.ipynb
+        - notebooks/09_flan_t5_rl.ipynb
+        - notebooks/10_SAWYER_LLAMA_SFT.ipynb
+        - notebooks/10_SAWYER_Reward_Model.ipynb
+        - notebooks/10_SAWYER_RLF.ipynb
+        - notebooks/10_SAWYER_USE_SAWYER.ipynb
+        - notebooks/10_anime_category_classification_model_freezing.ipynb
+        - notebooks/10_latex_gpt2.ipynb
+        - notebooks/10_optimizing_fine_tuning.ipynb
+        - notebooks/11_distillation_example_1.ipynb
+        - notebooks/11_distillation_example_2.ipynb
+        - notebooks/11_llama_quantization.ipynb
+        - notebooks/12_llm_calibration.ipynb
+        - notebooks/12_llm_gen_eval.ipynb
+        - notebooks/12_cluster.ipynb
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+
