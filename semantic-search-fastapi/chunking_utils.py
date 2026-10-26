@@ -17,8 +17,8 @@ def overlapping_chunks(text, max_tokens=500, overlapping_factor=5):
     overlapping_factor: number of sentences to start each chunk with that overlaps with the previous chunk
     '''
 
-    # Split the text using punctuation
-    sentences = re.split(r' *[\.\?!][\'"\)\]]* *', text)
+    # Split the text using punctuation (negative lookbehind prevents catastrophic backtracking / ReDoS on repeated spaces)
+    sentences = re.split(r'(?<!\s)\s*[\.\?!][\'"\)\]]*\s*', text)
 
     # Get the number of tokens for each sentence
     n_tokens = [len(tokenizer.encode(" " + sentence)) for sentence in sentences]

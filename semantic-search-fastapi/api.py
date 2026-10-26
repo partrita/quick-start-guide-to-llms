@@ -105,7 +105,7 @@ async def document_ingest(request: DocumentInputRequest):
     text = request.text
     chunking_strategy = request.chunking_strategy
     if chunking_strategy == "sentence":
-        chunks = re.split(r' *[\.\?!][\'"\)\]]* *', text)
+        chunks = re.split(r'(?<!\s)\s*[\.\?!][\'"\)\]]*\s*', text)
     elif chunking_strategy == "paragraph":
         chunks = text.split('\n')
     elif chunking_strategy == "none":
