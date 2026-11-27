@@ -1,6 +1,5 @@
 import hashlib
 import os
-import re
 from datetime import datetime
 
 import openai
@@ -12,6 +11,7 @@ from openai.embeddings_utils import get_embeddings
 from pydantic import BaseModel
 
 from chunking_utils import overlapping_chunks
+from sentence_split import split_sentences
 # optional use of supabase for conversation history
 from conversation_utils import ChatbotGPT
 from retrieval_utils import get_results
@@ -105,7 +105,7 @@ async def document_ingest(request: DocumentInputRequest):
     text = request.text
     chunking_strategy = request.chunking_strategy
     if chunking_strategy == "sentence":
-        chunks = re.split(r'(?<!\s)\s*[\.\?!][\'"\)\]]*\s*', text)
+        chunks = split_sentences(text)
     elif chunking_strategy == "paragraph":
         chunks = text.split('\n')
     elif chunking_strategy == "none":

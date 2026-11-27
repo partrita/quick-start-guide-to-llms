@@ -1,9 +1,9 @@
 # Importing the tiktoken library
-import re
-
 import PyPDF2
 import tiktoken
 from tqdm import tqdm
+
+from sentence_split import split_sentences
 
 # Initializing a tokenizer for the 'cl100k_base' model
 # This tokenizer is designed to work with the 'ada-002' embedding model
@@ -17,8 +17,9 @@ def overlapping_chunks(text, max_tokens=500, overlapping_factor=5):
     overlapping_factor: number of sentences to start each chunk with that overlaps with the previous chunk
     '''
 
-    # Split the text using punctuation (negative lookbehind prevents catastrophic backtracking / ReDoS on repeated spaces)
-    sentences = re.split(r'(?<!\s)\s*[\.\?!][\'"\)\]]*\s*', text)
+    # Split the text on punctuation with a single linear pass: no regular
+    # expression, so a crafted input cannot trigger polynomial backtracking.
+    sentences = split_sentences(text)
 
     # Get the number of tokens for each sentence
     n_tokens = [len(tokenizer.encode(" " + sentence)) for sentence in sentences]
