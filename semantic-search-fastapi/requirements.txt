@@ -1,4 +1,4 @@
-fastapi==0.70.1
+fastapi==0.109.1
 uvicorn==0.16.0
 openai==0.27.2
 pinecone-client==4.0.0
@@ -9,5 +9,4 @@ pandas
 scikit-learn
 tiktoken
 supabase
-PyPDF2==3.0.1
 tqdm
