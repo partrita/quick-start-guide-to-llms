@@ -1,5 +1,4 @@
 # Importing the tiktoken library
-import PyPDF2
 import tiktoken
 from tqdm import tqdm
 
